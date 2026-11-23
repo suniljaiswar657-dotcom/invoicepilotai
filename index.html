@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b1020"><meta name="description" content="ReceiptGuard AI helps small businesses audit invoices, spot duplicates and monitor expenses.">
+<title>ReceiptGuard AI — Stop money leaks</title><link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="shell">
+<aside class="sidebar">
+  <a class="brand" href="#"><span class="brandmark">R</span><span>RECEIPTGUARD<small>FINANCIAL INTELLIGENCE</small></span></a>
+  <div class="workspace"><span class="avatar">B</span><span><b>Business workspace</b><small>Local demo account</small></span><span class="dots">•••</span></div>
+  <nav><p class="navlabel">WORKSPACE</p><a class="navitem active" href="#overview">▦ <span>Overview</span></a><a class="navitem" href="#invoices">▤ <span>Invoices</span></a><a class="navitem" href="#audit">◈ <span>Audit center</span></a><a class="navitem" href="#reports">▥ <span>Reports</span></a><p class="navlabel">PREFERENCES</p><a class="navitem" href="#settings">⚙ <span>Settings</span></a></nav>
+  <div class="sidebottom"><div class="secure">✦ <span><b>Your data stays here</b><small>Stored in this browser</small></span></div><small>RECEIPTGUARD AI · MVP 1.0</small></div>
+</aside>
+<main class="main">
+<header class="topbar"><div><span class="eyebrow">MONDAY, YOUR FINANCE DESK</span><h1>Good business starts with clarity.</h1><p>Track invoices. Catch costly mistakes. Protect your cash flow.</p></div><div class="topactions"><span class="demo-pill">● DEMO MODE</span><button class="btn primary" id="addTop">＋ Add invoice</button></div></header>
+<section id="overview" class="metrics">
+ <article class="metric"><span>Total tracked spend</span><strong id="totalSpend">₹0</strong><small>Across all recorded invoices</small><i>₹</i></article>
+ <article class="metric"><span>Invoices tracked</span><strong id="invoiceCount">0</strong><small>Records in this workspace</small><i>▤</i></article>
+ <article class="metric"><span>Potential savings flagged</span><strong id="savings">₹0</strong><small>Duplicate / mismatch exposure</small><i>↗</i></article>
+ <article class="metric"><span>Needs attention</span><strong id="attention">0</strong><small>Invoices requiring review</small><i>!</i></article>
+</section>
+<section class="contentgrid">
+ <div class="panel" id="invoices"><div class="panelhead"><div><span class="eyebrow">YOUR MONEY, IN FOCUS</span><h2>Invoice register</h2><p>Review every bill in one place.</p></div><button class="btn secondary" id="importBtn">⇧ Import CSV</button></div>
+ <div class="toolbar"><input id="search" placeholder="Search vendor, invoice number…" aria-label="Search invoices"><select id="filter"><option value="all">All statuses</option><option value="Clear">Clear</option><option value="Review">Review</option><option value="Duplicate">Duplicate</option></select></div>
+ <div class="tablewrap"><table><thead><tr><th>VENDOR / INVOICE</th><th>DATE</th><th>AMOUNT</th><th>STATUS</th><th></th></tr></thead><tbody id="invoiceRows"><tr><td colspan="5" class="empty">No invoices yet. Add your first invoice to begin.</td></tr></tbody></table></div>
+ <div class="tablefoot"><span id="rowCount">0 invoices</span><button class="textbtn" id="exportBtn">Download CSV ↓</button></div>
+ </div>
+ <div class="panel auditpanel" id="audit"><div class="panelhead"><div><span class="eyebrow">RULE-BASED INTELLIGENCE</span><h2>Audit center</h2><p>Signals that deserve a second look.</p></div><span class="shield">◈</span></div><div id="alerts" class="alerts"><div class="empty">No audit signals yet. Add invoices to run checks.</div></div><div class="auditnote">ⓘ Flags are review suggestions, not proof of fraud. Verify against original documents.</div></div>
+</section>
+<section class="panel lower" id="reports"><div class="panelhead"><div><span class="eyebrow">FINANCIAL SNAPSHOT</span><h2>Spend overview</h2><p>Recorded invoice amounts by vendor.</p></div><button class="btn secondary" id="reportBtn">Export report</button></div><div id="spendBars" class="bars"><span class="empty">Add invoices to see your spend breakdown.</span></div></section>
+<footer>ReceiptGuard AI <span>Independent invoice review · Demo data is stored in this browser only.</span></footer>
+</main>
+</div>
+<dialog id="invoiceDialog"><form id="invoiceForm" method="dialog"><div class="dialoghead"><div><span class="eyebrow">NEW RECORD</span><h2>Add an invoice</h2></div><button type="button" class="close" id="closeDialog">×</button></div><p class="hint">Enter invoice details to check for duplicates and unusual amounts.</p><div class="formgrid"><label>Vendor name<input required name="vendor" placeholder="e.g. Acme Supplies"></label><label>Invoice number<input required name="number" placeholder="e.g. INV-1042"></label><label>Invoice date<input required type="date" name="date"></label><label>Amount<input required type="number" min="0.01" step="0.01" name="amount" placeholder="0.00"></label><label>Currency<select name="currency"><option>INR</option><option>USD</option><option>EUR</option><option>GBP</option></select></label><label>Due date (optional)<input type="date" name="due"></label><label class="full">Notes (optional)<textarea name="notes" rows="2" placeholder="Purchase order, payment reference…"></textarea></label></div><div class="dialogactions"><button type="button" class="btn secondary" id="cancelDialog">Cancel</button><button class="btn primary" type="submit">Save & audit invoice</button></div></form></dialog>
+<input id="csvFile" type="file" accept=".csv,text/csv" hidden>
+<div id="toast" role="status" aria-live="polite"></div>
+<script src="app.js"></script>
+</body></html>
